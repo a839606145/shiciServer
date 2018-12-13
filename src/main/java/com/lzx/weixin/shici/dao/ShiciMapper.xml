@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lzx.weixin.shici.dao.ShiciMapper">
+    
+    <sql id="pkCondition">
+        <trim prefix="" prefixOverrides="AND">
+                AND T3.id = #{id}
+        </trim>
+    </sql>
+    
+    <sql id="colList">
+        <trim prefix="" prefixOverrides=",">
+            , T3.annotation AS C8
+            , T3.author AS C9
+            , T3.atlas AS C10
+            , T3.introduce AS C11
+            , T3.ownform AS C12
+            , T3.appreciation AS C13
+            , T3.url AS C14
+            , T3.moral AS C15
+            , T3.dynasty AS C16
+            , T3.name AS C17
+            , T3.shichi AS C18
+            , T3.transfor AS C19
+            , T3.id AS C7
+        </trim>
+    </sql>
+    
+    <resultMap id="result" type="Shici">
+        <id column="C7" javaType="Integer" jdbcType="INTEGER" property="id"/>
+        <result column="C8" javaType="String" jdbcType="VARCHAR" property="annotation"/>
+        <result column="C9" javaType="String" jdbcType="VARCHAR" property="author"/>
+        <result column="C10" javaType="String" jdbcType="VARCHAR" property="atlas"/>
+        <result column="C11" javaType="String" jdbcType="VARCHAR" property="introduce"/>
+        <result column="C12" javaType="String" jdbcType="VARCHAR" property="ownform"/>
+        <result column="C13" javaType="String" jdbcType="VARCHAR" property="appreciation"/>
+        <result column="C14" javaType="String" jdbcType="VARCHAR" property="url"/>
+        <result column="C15" javaType="String" jdbcType="VARCHAR" property="moral"/>
+        <result column="C16" javaType="String" jdbcType="VARCHAR" property="dynasty"/>
+        <result column="C17" javaType="String" jdbcType="VARCHAR" property="name"/>
+        <result column="C18" javaType="String" jdbcType="VARCHAR" property="shichi"/>
+        <result column="C19" javaType="String" jdbcType="VARCHAR" property="transfor"/>
+    </resultMap>
+    
+    <select id="get" parameterType="int" resultMap="result">
+        SELECT <trim prefix="" prefixOverrides=",">
+            , T3.annotation AS C8
+            , T3.author AS C9
+            , T3.atlas AS C10
+            , T3.introduce AS C11
+            , T3.ownform AS C12
+            , T3.appreciation AS C13
+            , T3.url AS C14
+            , T3.moral AS C15
+            , T3.dynasty AS C16
+            , T3.name AS C17
+            , T3.shichi AS C18
+            , T3.transfor AS C19
+            , T3.id AS C7
+        </trim>
+          FROM shici T3 
+         WHERE <include refid="pkCondition"/>
+    </select>
+    
+    <update id="set" parameterType="Shici">
+        UPDATE shici T3 SET 
+            <trim prefix="" prefixOverrides=",">
+                    , annotation = #{annotation}
+                    , author = #{author}
+                    , atlas = #{atlas}
+                    , introduce = #{introduce}
+                    , ownform = #{ownform}
+                    , appreciation = #{appreciation}
+                    , url = #{url}
+                    , moral = #{moral}
+                    , dynasty = #{dynasty}
+                    , name = #{name}
+                    , shichi = #{shichi}
+                    , transfor = #{transfor}
+            </trim>
+        WHERE <include refid="pkCondition"/>
+    </update>
+    
+    <insert id="add" parameterType="Shici" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO shici (
+            <trim prefix="" prefixOverrides=",">
+                    , id
+                    , annotation
+                    , author
+                    , atlas
+                    , introduce
+                    , ownform
+                    , appreciation
+                    , url
+                    , moral
+                    , dynasty
+                    , name
+                    , shichi
+                    , transfor
+            </trim>
+        ) VALUES (
+            <trim prefix="" prefixOverrides=",">
+                    , #{id}
+                    , #{annotation}
+                    , #{author}
+                    , #{atlas}
+                    , #{introduce}
+                    , #{ownform}
+                    , #{appreciation}
+                    , #{url}
+                    , #{moral}
+                    , #{dynasty}
+                    , #{name}
+                    , #{shichi}
+                    , #{transfor}
+            </trim>
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="int">
+        DELETE T3 FROM shici T3 WHERE <include refid="pkCondition"/>
+    </delete>
+    
+    <select id="list" parameterType="map" resultMap="result">
+        SELECT <include refid="colList" />
+          FROM shici T3
+        <where>
+            <if test="id != null">AND T3.id = #{id}</if>
+            <if test="idGT != null">AND T3.id > #{idGT}</if><if test="idLT != null">AND #{idLT} > T3.id</if>
+            <if test="annotation != null">AND T3.annotation = #{annotation}</if>
+            <if test="annotationLK != null">AND T3.annotation LIKE #{annotationLK}</if>
+            <if test="author != null">AND T3.author = #{author}</if>
+            <if test="authorLK != null">AND T3.author LIKE #{authorLK}</if>
+            <if test="atlas != null">AND T3.atlas = #{atlas}</if>
+            <if test="atlasLK != null">AND T3.atlas LIKE #{atlasLK}</if>
+            <if test="introduce != null">AND T3.introduce = #{introduce}</if>
+            <if test="introduceLK != null">AND T3.introduce LIKE #{introduceLK}</if>
+            <if test="ownform != null">AND T3.ownform = #{ownform}</if>
+            <if test="ownformLK != null">AND T3.ownform LIKE #{ownformLK}</if>
+            <if test="appreciation != null">AND T3.appreciation = #{appreciation}</if>
+            <if test="appreciationLK != null">AND T3.appreciation LIKE #{appreciationLK}</if>
+            <if test="url != null">AND T3.url = #{url}</if>
+            <if test="urlLK != null">AND T3.url LIKE #{urlLK}</if>
+            <if test="moral != null">AND T3.moral = #{moral}</if>
+            <if test="moralLK != null">AND T3.moral LIKE #{moralLK}</if>
+            <if test="dynasty != null">AND T3.dynasty = #{dynasty}</if>
+            <if test="dynastyLK != null">AND T3.dynasty LIKE #{dynastyLK}</if>
+            <if test="name != null">AND T3.name = #{name}</if>
+            <if test="nameLK != null">AND T3.name LIKE #{nameLK}</if>
+            <if test="shichi != null">AND T3.shichi = #{shichi}</if>
+            <if test="shichiLK != null">AND T3.shichi LIKE #{shichiLK}</if>
+            <if test="transfor != null">AND T3.transfor = #{transfor}</if>
+            <if test="transforLK != null">AND T3.transfor LIKE #{transforLK}</if>
+
+        </where>
+        <if test="orderBy != null">ORDER BY ${orderBy}</if>
+        <if test="pageStartPos != null and pageSize != null">LIMIT #{pageStartPos}, #{pageSize}</if>
+    </select>
+    
+    <select id="count" parameterType="map" resultType="int">
+        SELECT COUNT(1) 
+          FROM shici T3
+        <where>
+            <if test="id != null">AND T3.id = #{id}</if>
+            <if test="idGT != null">AND T3.id > #{idGT}</if><if test="idLT != null">AND #{idLT} > T3.id</if>
+            <if test="annotation != null">AND T3.annotation = #{annotation}</if>
+            <if test="annotationLK != null">AND T3.annotation LIKE #{annotationLK}</if>
+            <if test="author != null">AND T3.author = #{author}</if>
+            <if test="authorLK != null">AND T3.author LIKE #{authorLK}</if>
+            <if test="atlas != null">AND T3.atlas = #{atlas}</if>
+            <if test="atlasLK != null">AND T3.atlas LIKE #{atlasLK}</if>
+            <if test="introduce != null">AND T3.introduce = #{introduce}</if>
+            <if test="introduceLK != null">AND T3.introduce LIKE #{introduceLK}</if>
+            <if test="ownform != null">AND T3.ownform = #{ownform}</if>
+            <if test="ownformLK != null">AND T3.ownform LIKE #{ownformLK}</if>
+            <if test="appreciation != null">AND T3.appreciation = #{appreciation}</if>
+            <if test="appreciationLK != null">AND T3.appreciation LIKE #{appreciationLK}</if>
+            <if test="url != null">AND T3.url = #{url}</if>
+            <if test="urlLK != null">AND T3.url LIKE #{urlLK}</if>
+            <if test="moral != null">AND T3.moral = #{moral}</if>
+            <if test="moralLK != null">AND T3.moral LIKE #{moralLK}</if>
+            <if test="dynasty != null">AND T3.dynasty = #{dynasty}</if>
+            <if test="dynastyLK != null">AND T3.dynasty LIKE #{dynastyLK}</if>
+            <if test="name != null">AND T3.name = #{name}</if>
+            <if test="nameLK != null">AND T3.name LIKE #{nameLK}</if>
+            <if test="shichi != null">AND T3.shichi = #{shichi}</if>
+            <if test="shichiLK != null">AND T3.shichi LIKE #{shichiLK}</if>
+            <if test="transfor != null">AND T3.transfor = #{transfor}</if>
+            <if test="transforLK != null">AND T3.transfor LIKE #{transforLK}</if>
+
+        </where>
+    </select>
+    
+     <select id="list2" parameterType="map" resultMap="result">
+        SELECT <include refid="colList" />
+          FROM shici T3
+        <where>
+            <if test="key != null">
+            AND (T3.author LIKE #{key} or T3.name LIKE #{key} or T3.shichi LIKE #{key})
+            </if>
+        </where>
+        <if test="orderBy != null">ORDER BY ${orderBy}</if>
+        <if test="pageStartPos != null and pageSize != null">LIMIT #{pageStartPos}, #{pageSize}</if>
+    </select>
+    
+     <select id="count2" parameterType="map" resultType="int">
+        SELECT COUNT(1) 
+          FROM shici T3
+       <where>
+            <if test="key != null">
+            AND (T3.author LIKE #{key} or T3.name LIKE #{key} or T3.shichi LIKE #{key})
+            </if>
+        </where>
+    </select>
+    
+</mapper>
